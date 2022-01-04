@@ -12,6 +12,9 @@ depot3
 These scripts are "proof-of-concept" status and should not be considered fully
 vetted for production purposes at this time.
 
+> :clap: Special thanks to Nate Geschwill (@NathanielGeschwill) for helping me
+> flesh out these scripts.
+
 ## Scripts
 
 To use these batch scripts, you must have the following dependencies met:
