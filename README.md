@@ -12,8 +12,10 @@ depot3
 These scripts are "proof-of-concept" status and should not be considered fully
 vetted for production purposes at this time.
 
-> :clap: Special thanks to Nate Geschwill (@NathanielGeschwill) for helping me
+> :clap: Thanks to Nate Geschwill ([@NathanielGeschwill][ghNate]) for helping me
 > flesh out these scripts.
+
+[ghNate]:https://github.com/NathanielGeschwill
 
 ## Scripts
 
