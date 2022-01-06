@@ -24,7 +24,7 @@ To use these batch scripts, you must have the following dependencies met:
 - git
 - git lfs
 - p4
-- hub
+- gh
 - Command Prompt (these are batch scripts after all)
 
 These scripts also interact with GitHub and Perforce servers. You will need to
@@ -42,8 +42,6 @@ migrated from a basic Git repo to one that contains LFS artifacts with settings
 that mirror our P4 typemap.
 
 The script also takes care of creating the repository abn
-
-> :warning: The migrated repository is **public** by default at this time.
 
 This makes no changes to the depots itself and is safe to run.
 

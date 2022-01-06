@@ -7,11 +7,13 @@ REM git config hub.protocol https
 for /F "delims=" %%i in (target.txt) do (
     echo ==================MIGRATING %%i=======================
 
-    REM Clone the project
-    git p4 clone //%%i/@all
+    git init .\%%i\
 
     REM Move to the project folder (pushd)
     pushd %%i
+
+    REM Clone the project
+    git p4 clone //%%i/@all .
 
     REM Print LFS stats
     git lfs migrate info
@@ -21,11 +23,17 @@ for /F "delims=" %%i in (target.txt) do (
 
     REM Create the repo on GitHub
     REM Replace 'AIE-Seattle-Prog' with the org/user you are creating repos in
-    hub create AIE-Seattle-Prog/%%i
+    gh repo create AIE-Seattle-Prog/%%i --disable-issues --disable-wiki --private --remote origin --source .
+
+    gh repo edit AIE-Seattle-Prog/%%i --add-topic perforce-archive,production
 
     REM Push the project to GitHub
     git push origin master
 
+    gh repo archive -y
+
     REM Popd back to the original folder
     popd
+
+    rmdir /s /q %%i
 )
