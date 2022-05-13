@@ -1,7 +1,7 @@
 # P4 to Git Archive
 
-This contains a set of scripts that operate on P4 depots specified by lines in a
-"target.txt" file in the working directory.
+This contains a set of scripts that download P4 depots and push them onto GitHub
+as a new repository.
 
 ```text
 depot1
@@ -22,17 +22,21 @@ vetted for production purposes at this time.
 To use these batch scripts, you must have the following dependencies met:
 
 - git
+- [git-p4](https://www.atlassian.com/git/tutorials/git-p4)
 - git lfs
 - p4
 - gh
 - Command Prompt (these are batch scripts after all)
 
-These scripts also interact with GitHub and Perforce servers. You will need to
-verify that you have the following permissions:
+These scripts also interact with GitHub and Perforce servers.
 
-- Read permissions to depots that you are migrating
-- Super permissions to depots you are scrubbing/"cleaning" from the server
-- Create repo permissions to the user/org you are migrating to
+You will need to verify that you have the following permissions on Perforce:
+
+- Migrate
+  - Read permissions to depots that you are migrating
+  - Create repo permissions to the user/org you are migrating to
+- Clean
+  - Super permissions to depots you are scrubbing/"cleaning" from the server
 
 ### P4 Migrate
 
@@ -41,9 +45,11 @@ relevant to a specific depot in a Git repository. The repository is then
 migrated from a basic Git repo to one that contains LFS artifacts with settings
 that mirror our P4 typemap.
 
-The script also takes care of creating the repository abn
+The script also takes care of creating the local and remote repositories and
+pushing the contents. No changes are made to depots.
 
-This makes no changes to the depots itself and is safe to run.
+To specify which files to migrate, write a `target.txt` file with P4 file
+specs separated by newlines and place it in your working directory.
 
 ### P4 Clean
 
@@ -54,6 +60,11 @@ the server to populate any "lazy links" to files referenced by the depot,
 This is a **very destructive** script and does not provide many points for
 validation and testing. Ensure that you are only deleting depots that you intend
 to lose forever.
+
+> :warning: This uses `p4 obliterate` to scrub a depot from the P4 server.
+
+As with the migration script, this assumes a `target.txt` file with P4 file
+specs separated by newlines.
 
 ## License
 
