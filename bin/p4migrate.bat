@@ -31,10 +31,17 @@ for /F "delims=" %%i in (target.txt) do (
     REM (e.g., perforce-archive,production)
     gh repo edit %GIT_ARCHIVE_ACCOUNT%/%%i --add-topic %GIT_ARCHIVE_TAGS%
 
+    REM Retrieve branch name
+    SETLOCAL
+    git rev-parse --abbrev-ref HEAD > .TEMP_BRANCHNAME
+    set /p _GIT_ARCHIVE_BRANCHNAME=<.TEMP_BRANCHNAME
+    del .TEMP_BRANCHNAME
+
     REM Push the project to GitHub
-    git push origin master
+    git push origin %_GIT_ARCHIVE_BRANCHNAME%
 
     gh repo archive -y
+    ENDLOCAL
 
     REM Popd back to the original folder
     popd
