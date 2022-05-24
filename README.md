@@ -51,6 +51,11 @@ pushing the contents. No changes are made to depots.
 To specify which files to migrate, write a `target.txt` file with P4 file
 specs separated by newlines and place it in your working directory.
 
+The account to upload to and topic tags to apply are defined by env vars:
+
+- `GIT_ARCHIVE_ACCOUNT` should be an account (ex: `AIE-Seattle-Prog`)
+- `GIT_ARCHIVE_TAGS` should be a comma-separated set of tags (ex: `production,perforce-archive`)
+
 ### P4 Clean
 
 The [clean script](bin/p4clean.bat) scrubs a depot from the P4 server by forcing

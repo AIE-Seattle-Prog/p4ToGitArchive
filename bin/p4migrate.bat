@@ -22,10 +22,14 @@ for /F "delims=" %%i in (target.txt) do (
     git lfs migrate import --everything --include="*.jpg, *.jpeg, *.png, *.gif, *.psd, *.ai, *.tiff, *.tif, *.bmp, *.mp3, *.wav, *.ogg, *.aac, *.mp4, *.mov, *.mkv, *.FBX, *.fbx, *.blend, *.obj, *.mb, *.ma, *.a, *.exr, *.tga, *.pdf, *.zip, *.dll, *.aif, *.ttf, *.rns, *.reason, *.lxo, *.unity, *.asset, *.unitypackage, *.shadergraph"
 
     REM Create the repo on GitHub
-    REM Replace 'AIE-Seattle-Prog' with the org/user you are creating repos in
-    gh repo create AIE-Seattle-Prog/%%i --disable-issues --disable-wiki --private --remote origin --source .
 
-    gh repo edit AIE-Seattle-Prog/%%i --add-topic perforce-archive,production
+    REM Set '%GIT_ARCHIVE_ACCOUNT%' with the org/user you are creating repos in
+    REM (e.g., AIE-Seattle-Prog)
+    gh repo create %GIT_ARCHIVE_ACCOUNT%/%%i --disable-issues --disable-wiki --private --remote origin --source .
+
+    REM Set '%GIT_ARCHIVE_TAGS%' with a comma-separated list of topic tags
+    REM (e.g., perforce-archive,production)
+    gh repo edit %GIT_ARCHIVE_ACCOUNT%/%%i --add-topic %GIT_ARCHIVE_TAGS%
 
     REM Push the project to GitHub
     git push origin master
