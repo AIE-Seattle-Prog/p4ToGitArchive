@@ -16,10 +16,10 @@ for /F "delims=" %%i in (target.txt) do (
     git p4 clone //%%i/@all .
 
     REM Print LFS stats
-    git lfs migrate info
+    git lfs migrate info --yes
 
     REM Migrate the project to LFS
-    git lfs migrate import --everything --include="*.jpg, *.jpeg, *.png, *.gif, *.psd, *.ai, *.tiff, *.tif, *.bmp, *.mp3, *.wav, *.ogg, *.aac, *.mp4, *.mov, *.mkv, *.avi, *.FBX, *.fbx, *.blend, *.obj, *.mb, *.ma, *.a, *.exr, *.tga, *.tex, *.pdf, *.zip, *.dll, *.aif, *.ttf, *.rns, *.reason, *.lxo, *.abc, *.unity, *.asset, *.unitypackage, *.shadergraph"
+    git lfs migrate import --everything --include="*.jpg, *.jpeg, *.png, *.gif, *.psd, *.ai, *.tiff, *.tif, *.bmp, *.mp3, *.wav, *.ogg, *.aac, *.mp4, *.mov, *.mkv, *.avi, *.FBX, *.fbx, *.blend, *.obj, *.mb, *.ma, *.a, *.exr, *.tga, *.tex, *.pdf, *.zip, *.dll, *.aif, *.ttf, *.rns, *.reason, *.lxo, *.abc, *.unity, *.asset, *.unitypackage, *.shadergraph, *.uasset, *.umap" --yes
 
     REM Create the repo on GitHub
 
@@ -32,7 +32,8 @@ for /F "delims=" %%i in (target.txt) do (
     gh repo edit %GIT_ARCHIVE_ACCOUNT%/%%i --add-topic %GIT_ARCHIVE_TAGS%
 
     REM Push the project to GitHub
-    git push origin master
+    git config http.postBuffer 2147483648
+    git push origin main
 
     gh repo archive -y
 
