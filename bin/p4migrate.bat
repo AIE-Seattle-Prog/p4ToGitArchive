@@ -19,7 +19,7 @@ for /F "delims=" %%i in (target.txt) do (
     git lfs migrate info --yes
 
     REM Migrate the project to LFS
-    git lfs migrate import --everything --include="*.jpg, *.jpeg, *.png, *.gif, *.psd, *.ai, *.tiff, *.tif, *.bmp, *.mp3, *.wav, *.ogg, *.aac, *.mp4, *.mov, *.mkv, *.avi, *.FBX, *.fbx, *.blend, *.obj, *.mb, *.ma, *.a, *.exr, *.tga, *.tex, *.pdf, *.zip, *.dll, *.aif, *.ttf, *.rns, *.reason, *.lxo, *.abc, *.unity, *.asset, *.unitypackage, *.shadergraph, *.uasset, *.umap" --yes
+    git lfs migrate import --everything --include="*.jpg, *.jpeg, *.png, *.gif, *.psd, *.ai, *.tiff, *.tif, *.bmp, *.mp3, *.wav, *.ogg, *.aac, *.mp4, *.mov, *.mkv, *.avi, *.FBX, *.fbx, *.blend, *.obj, *.mb, *.ma, *.a, *.exr, *.tga, *.tex, *.pdf, *.zip, *.dll, *.aif, *.ttf, *.rns, *.reason, *.lxo, *.abc, *.unity, *.prefab, *.asset, *.unitypackage, *.shadergraph, *.uasset, *.umap" --yes
 
     REM Create the repo on GitHub
 
@@ -33,6 +33,7 @@ for /F "delims=" %%i in (target.txt) do (
 
     REM Push the project to GitHub
     git config http.postBuffer 2147483648
+    git checkout -b main
     git push origin main
 
     gh repo archive -y
